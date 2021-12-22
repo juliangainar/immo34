@@ -5,4 +5,12 @@ framework:
         # Enables validator auto-mapping support.
         # For instance, basic validation constraints will be inferred from Doctrine's metadata.
         #auto_mapping:
-        #    App\Entity\: []
+#          App\Entity\Property:
+#            properties:
+#              surface:
+#                - Range:
+#                    min: 10
+#                    max : 400
+#                    notInRangeMessage: La valeur doit être comprise entre {{ min }} et {{ max }}
+
+

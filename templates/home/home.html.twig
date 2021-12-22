@@ -16,11 +16,11 @@
                 <div class="col-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}"> {{ property.title }}</a>
+                            <h5 class="card-title ">
+                                <a class="text-success" style="text-decoration: none; font-weight: bold" href="{{ path('property.show', {id: property.id, slug: property.slug}) }}"> {{ property.title }}</a>
                             </h5>
                             <p class="card-text"> {{ property.city }} ({{ property.postalCode }})</p>
-                            <div class="text-primary" style="font-weight: bold; font-size: 2rem;"> {{ property.formattedPrice }} €</div>
+                            <div class="text-success" style="font-weight: bold; font-size: 2rem;"> {{ property.formattedPrice }} €</div>
                         </div>
                     </div>
                 </div>

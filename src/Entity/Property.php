@@ -5,13 +5,18 @@ namespace App\Entity;
 use Cocur\Slugify\Slugify;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
+ *
  */
+#[UniqueEntity('title')]
 class Property
 {
-
     const HEAT = [
         0 => 'Éléctrique',
         1 => 'Gaz'
@@ -34,14 +39,28 @@ class Property
      */
     private $description;
 
+
     /**
      * @ORM\Column(type="integer")
+     *
+     *
      */
+//    #[Assert\Range(
+//        min: 10,
+//        max: 400,
+//        notInRangeMessage: 'La valeur doit être comprise entre {{ min }} et {{ max }}.',
+//    )]
     private $surface;
 
     /**
      * @ORM\Column(type="integer")
      */
+//    #[Assert\Range(
+//        min: 1,
+//        max: 10,
+//        notInRangeMessage: 'La valeur doit être comprise entre {{ min }} et {{ max }}.',
+//    )]
+
     private $rooms;
 
     /**
@@ -257,12 +276,12 @@ class Property
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTime $created_at): self
     {
         $this->created_at = $created_at;
 
