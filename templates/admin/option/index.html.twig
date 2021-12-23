@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Immo34 | Administration des options{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Gestion des options</h1>
+        <div>
+            <a href="{{ path('admin.option.new') }}" class="btn btn-success">Ajouter une nouvelle option</a>
+            <a href="{{ path('admin.property.index') }}" class="btn btn-dark">Gérer les biens</a>
+        </div>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Adresse</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%  for option in options %}
+                    <tr>
+                        <td>{{ option.name }}</td>
+                        <td>
+                            <a href="{{ path('admin.option.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
+                            <form method="post" action="{{ path('admin.option.delete', {id: option.id}) }}" style="display: inline-block;" onsubmit="return confirm('Voulez-vous vraiment le supprimer ?')">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

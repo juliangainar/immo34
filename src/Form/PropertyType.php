@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Property;
+use App\Entity\Option;
 use Doctrine\DBAL\Types\IntegerType;
+use Doctrine\DBAL\Types\StringType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -41,13 +44,15 @@ class PropertyType extends AbstractType
             ->add('price')
             ->add('heat', ChoiceType::class, [
                 'choices' => array_flip(Property::HEAT)
-    ])
+            ])
+            ->add('options', EntityType::class, [
+                'class' => Option::class,
+                'choice_label' => 'name',
+                'multiple' => true
+            ])
             ->add('city')
             ->add('adress')
-            ->add('postal_code', NumberType::class,[
-                'constraints' => [
-                    new Regex("/^[0-9]{5}$/")]]
-                )
+            ->add('postal_code')
             ->add('sold');
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class PropertySearch{
 
 
@@ -13,6 +15,33 @@ class PropertySearch{
      * @var int|null
      */
     private $minSurface;
+
+
+    /**
+     * @var ArrayCollection
+     */
+    private $options;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOptions(): ArrayCollection
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param ArrayCollection $options
+     */
+    public function setOptions(ArrayCollection $options): void
+    {
+        $this->options = $options;
+    }
+
+    public function __construct()
+    {
+        $this->options = new ArrayCollection();
+    }
 
     /**
      * @return int|null

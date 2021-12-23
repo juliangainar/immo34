@@ -5,6 +5,10 @@
 {% block body %}
     <div class="container mt-4">
         <h1>Gestion des biens</h1>
+        <div>
+            <a href="{{ path('admin.property.new') }}" class="btn btn-success">Ajouter un nouveau bien</a>
+            <a href="{{ path('admin.option.index') }}" class="btn btn-dark">Gérer les options</a>
+        </div>
 
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
@@ -36,8 +40,6 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div>
-            <a href="{{ path('admin.property.new') }}" class="btn btn-success">Ajouter un nouveau bien</a>
-        </div>
+
     </div>
 {% endblock %}

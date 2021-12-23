@@ -81,6 +81,7 @@ class AdminPropertyController extends AbstractController
     #[Route('/admin/property/{id}', name: 'admin.property.edit')]
     public function edit(Property $property, Request $request) : Response
     {
+
         $form = $this->createForm(PropertyType::class, $property);
         // il va comparer et definir les champs
         $form->handleRequest($request);

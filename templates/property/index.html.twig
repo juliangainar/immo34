@@ -7,13 +7,16 @@
     <div class="container">
         {{ form_start(form) }}
             <div class="form-row d-flex justify-content-center">
-                <div class="col">
+                <div class="col m-1">
                     {{ form_row(form.minSurface) }}
                 </div>
-                <div class="col">
+                <div class="col m-1">
                     {{ form_row(form.maxPrice) }}
                 </div>
-                <div class="col">
+                <div class="col-2">
+                    {{ form_row(form.options)}}
+                </div>
+                <div class="col m-lg-1">
                     <button class="btn btn-dark">Rechercher</button>
                 </div>
             </div>

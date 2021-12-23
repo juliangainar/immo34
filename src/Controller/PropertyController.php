@@ -73,9 +73,9 @@ class PropertyController extends AbstractController
         $form = $this->createForm(PropertySearchType::class, $search);
         $form->handleRequest($request);
         $properties = $paginator->paginate($this->repository->findAllVisible($search), $request->query->getInt('page', 1),12);
-        return $this->render('property/propertyIndex.html.twig',
+        return $this->render('property/index.html.twig',
         [
-            'current_menu' => 'properties',
+            'current_menu' => 'property.index',
             'properties'=>$properties,
             'form' => $form->createView()
         ]);
