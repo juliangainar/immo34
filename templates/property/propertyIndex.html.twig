@@ -3,9 +3,34 @@
 {% block title %}Immo34 | Découvrez Nos Biens{% endblock %}
 
 {% block body %}
-
+<div class="jumbotron mt-4">
+    <div class="container">
+        {{ form_start(form) }}
+            <div class="form-row d-flex justify-content-center">
+                <div class="col">
+                    {{ form_row(form.minSurface) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.maxPrice) }}
+                </div>
+                <div class="col">
+                    <button class="btn btn-dark">Rechercher</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
 <div class="jumbotron text-center p-5">
     <h1> Découvrez Nos Biens </h1>
     <p> L'agence Immo34 vous propose une large panoplie de biens à votre disposition.</p>
+
+    <div class="row">
+        {% for property in properties%}
+            <div class="col-md-4">
+                {% include 'property/_property.html.twig' %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="pagination"> {{ knp_pagination_render(properties) }}</div>
 </div>
 {% endblock %}

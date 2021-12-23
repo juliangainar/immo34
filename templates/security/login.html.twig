@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Immo34 | Connexion{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="d-flex justify-content-center">Connexion</h1>
+    </div>
+    {% if error %}
+        <div class="alert alert-danger d-flex justify-content-center">
+            {{ error.messageKey | trans(error.messagedata, 'security') }}
+        </div>
+    {% endif %}
+    <div class="container mt-4 d-flex justify-content-center">
+        <form action="{{ path('login') }}" method="post">
+            <div class="form-group mb-4" >
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" class="username" name="_username" id="username" class="from-control" style="display: block" value="{{ last_username }}">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password"  class="username mb-4" id="password" name="_password" class="from-control" style="display: block">
+            </div>
+
+            <button type="submit" class="btn btn-success"> Se connecter</button>
+        </form>
+    </div>
+{% endblock %}
