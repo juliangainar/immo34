@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Entity\Property;
 use App\Entity\PropertySearch;
+use App\Form\ContactType;
 use App\Form\PropertySearchType;
+use App\Notification\ContactNotification;
 use App\Repository\PropertyRepository;
 use Doctrine\Persistence\ObjectManager;
 use Knp\Component\Pager\PaginatorInterface;
@@ -12,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PropertyController extends AbstractController
@@ -87,11 +93,27 @@ class PropertyController extends AbstractController
      * */
 
     #[Route('/biens/{slug}-{id}', name: 'property.show', requirements: ['slug' => '[a-z0-9\-]*'])]
-    public function show($slug, $id) : Response{
+    public function show($slug, $id, Request $request, ContactNotification $notification) : Response{
+
         $property = $this->repository->find($id);
+
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+        $contact->setProperty($property);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $notification->notify($contact);
+            $this->addFlash('success', 'Votre message a bien été envoyé.');
+            return $this->redirectToRoute('property.show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ]);
+        }
+
         return $this->render('property/show.html.twig', [
             'property' => $property,
-            'current-menu' => 'properties'
+            'current-menu' => 'properties',
+            'form' => $form->createView()
         ]);
 
     }

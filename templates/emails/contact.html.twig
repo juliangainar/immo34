@@ -1,0 +1,10 @@
+<h1>Demande de contact : {{ contact.property.title }}</h1>
+<p>Une nouvelle personne souhaiterait plus d'infos sur le bien : <a href="{{ url('property.show', {id: contact.property.id, slug: contact.property.slug}) }}">{{ contact.property.title }}</a></p>
+
+<h2>Informations de la personne :</h2>
+<ul>
+    <li>Nom : {{ contact.lastname }}</li>
+    <li>Prenom : {{ contact.firstname }}</li>
+    <li>Mail : {{ contact.email }}</li>
+    <li>Telephone : {{ contact.phone }}</li>
+</ul>
